@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"strings"
+	"time"
 )
 
 var tabuleirop [3][3]string
@@ -21,6 +22,8 @@ var linha, coluna int
 var principal string
 var miniempate string
 var vencedor string
+var escolhajogador string
+var novo string
 
 func inicio() bool {
 	for {
@@ -37,7 +40,7 @@ func inicio() bool {
 			fmt.Print("\nAté a próxima então!\n")
 			return false
 		}
-		fmt.Print("\nResposta inválida. Por favor, digite SIM ou NÃO.\n")
+		fmt.Print("\nLarga de palhaçada e digida SIM ou NÃO pf.\n")
 	}
 }
 
@@ -280,50 +283,50 @@ func vereficarvencedorreal() bool {
 		if tabuleirop[i][0] == tabuleirop[i][1] && tabuleirop[i][1] == tabuleirop[i][2] {
 			return true
 		}
-		if tabuleirop[i][0] == tabuleirop[i][1] && tabuleirop[i][2] == "Ø" {
+		if tabuleirop[i][0] == tabuleirop[i][1] && tabuleirop[i][2] == "\u001B[35mØ\u001B[0m" {
 			return true
 		}
-		if tabuleirop[i][2] == tabuleirop[i][1] && tabuleirop[i][0] == "Ø" {
+		if tabuleirop[i][2] == tabuleirop[i][1] && tabuleirop[i][0] == "\u001B[35mØ\u001B[0m" {
 			return true
 		}
-		if tabuleirop[i][2] == tabuleirop[i][0] && tabuleirop[i][1] == "Ø" {
+		if tabuleirop[i][2] == tabuleirop[i][0] && tabuleirop[i][1] == "\u001B[35mØ\u001B[0m" {
 			return true
 		}
 		if tabuleirop[0][i] == tabuleirop[1][i] && tabuleirop[1][i] == tabuleirop[2][i] {
 			return true
 		}
-		if tabuleirop[0][i] == tabuleirop[1][i] && tabuleirop[2][i] == "Ø" {
+		if tabuleirop[0][i] == tabuleirop[1][i] && tabuleirop[2][i] == "\u001B[35mØ\u001B[0m" {
 			return true
 		}
-		if tabuleirop[2][i] == tabuleirop[1][i] && tabuleirop[0][i] == "Ø" {
+		if tabuleirop[2][i] == tabuleirop[1][i] && tabuleirop[0][i] == "\u001B[35mØ\u001B[0m" {
 			return true
 		}
-		if tabuleirop[0][i] == tabuleirop[2][i] && tabuleirop[1][i] == "Ø" {
+		if tabuleirop[0][i] == tabuleirop[2][i] && tabuleirop[1][i] == "\u001B[35mØ\u001B[0m" {
 			return true
 		}
 	}
 	if tabuleirop[0][0] == tabuleirop[1][1] && tabuleirop[1][1] == tabuleirop[2][2] {
 		return true
 	}
-	if tabuleirop[0][0] == tabuleirop[1][1] && tabuleirop[2][2] == "Ø" {
+	if tabuleirop[0][0] == tabuleirop[1][1] && tabuleirop[2][2] == "\u001B[35mØ\u001B[0m" {
 		return true
 	}
-	if tabuleirop[0][0] == tabuleirop[2][2] && tabuleirop[1][1] == "Ø" {
+	if tabuleirop[0][0] == tabuleirop[2][2] && tabuleirop[1][1] == "\u001B[35mØ\u001B[0m" {
 		return true
 	}
-	if tabuleirop[2][2] == tabuleirop[1][1] && tabuleirop[0][0] == "Ø" {
+	if tabuleirop[2][2] == tabuleirop[1][1] && tabuleirop[0][0] == "\u001B[35mØ\u001B[0m" {
 		return true
 	}
 	if tabuleirop[0][2] == tabuleirop[1][1] && tabuleirop[1][1] == tabuleirop[2][0] {
 		return true
 	}
-	if tabuleirop[0][2] == tabuleirop[1][1] && tabuleirop[2][0] == "Ø" {
+	if tabuleirop[0][2] == tabuleirop[1][1] && tabuleirop[2][0] == "\u001B[35mØ\u001B[0m" {
 		return true
 	}
-	if tabuleirop[2][0] == tabuleirop[1][1] && tabuleirop[0][2] == "Ø" {
+	if tabuleirop[2][0] == tabuleirop[1][1] && tabuleirop[0][2] == "\u001B[35mØ\u001B[0m" {
 		return true
 	}
-	if tabuleirop[2][0] == tabuleirop[0][2] && tabuleirop[1][1] == "Ø" {
+	if tabuleirop[2][0] == tabuleirop[0][2] && tabuleirop[1][1] == "\u001B[35mØ\u001B[0m" {
 		return true
 	}
 	return false
@@ -741,10 +744,10 @@ func verificarposicao() {
 }
 
 func trocadejogador() {
-	if jogadorAtual == "X" {
-		jogadorAtual = "O"
+	if jogadorAtual == "\u001B[31mX\u001B[0m" {
+		jogadorAtual = "\u001B[34mO\u001B[0m"
 	} else {
-		jogadorAtual = "X"
+		jogadorAtual = "\u001B[31mX\u001B[0m"
 	}
 }
 
@@ -752,15 +755,24 @@ func main() {
 	if inicio() {
 		inicializarTabuleirop()
 
-		jogadorAtual = "X"
-		miniempate = "Ø"
+		t := time.Now()
+		if t.Second()%2 == 0 {
+			jogadorAtual = "\u001B[34mO\u001B[0m"
+		} else {
+			jogadorAtual = "\u001B[31mX\u001B[0m"
+		}
+
+		miniempate = "\u001B[35mØ\u001B[0m"
 
 		for {
 			fmt.Print("\n -----JOGO DA VELHA 2.0-----\n")
 			imprimirTabuleirop()
 			fmt.Printf("Jogador %s, escolha por onde deseja começar: ", jogadorAtual)
 			fmt.Scan(&principal)
-			if principal == "1" || principal == "2" || principal == "3" || principal == "4" || principal == "5" || principal == "6" || principal == "7" || principal == "8" || principal == "9" || principal == "#1" || principal == "#2" || principal == "#3" || principal == "#4" || principal == "#5" || principal == "#6" || principal == "#7" || principal == "#8" || principal == "#9" {
+			if principal == "1" || principal == "2" || principal == "3" || principal == "4" || principal == "5" ||
+				principal == "6" || principal == "7" || principal == "8" || principal == "9" || principal == "#1" ||
+				principal == "#2" || principal == "#3" || principal == "#4" || principal == "#5" || principal == "#6" ||
+				principal == "#7" || principal == "#8" || principal == "#9" {
 				break
 			}
 			fmt.Print("\nMermão digita direito isso ae bora\n")
@@ -769,7 +781,7 @@ func main() {
 		if movimentopodetp(principal) {
 			realizarMovimentop(principal)
 			for {
-				if tabuleirop[linha][coluna] == "X" || tabuleirop[linha][coluna] == "O" || tabuleirop[linha][coluna] == "Ø" {
+				if tabuleirop[linha][coluna] == "\u001B[31mX\u001B[0m" || tabuleirop[linha][coluna] == "\u001B[34mO\u001B[0m" || tabuleirop[linha][coluna] == "\u001B[35mØ\u001B[0m" {
 					imprimirTabuleirop()
 
 					fmt.Printf("Jogador %s, escolha por onde deseja jogar: ", jogadorAtual)
@@ -799,47 +811,47 @@ func main() {
 
 				switch principal {
 				case "#1", "1":
-					if linha < 0 || linha >= 3 || coluna < 0 || coluna >= 3 || tab1[linha][coluna] == "X" || tab1[linha][coluna] == "O" {
+					if linha < 0 || linha >= 3 || coluna < 0 || coluna >= 3 || tab1[linha][coluna] == "\u001B[31mX\u001B[0m" || tab1[linha][coluna] == "\u001B[34mO\u001B[0m" {
 						fmt.Println("Posição inválida. Tente novamente.")
 						continue
 					}
 				case "#2", "2":
-					if linha < 0 || linha >= 3 || coluna < 0 || coluna >= 3 || tab2[linha][coluna] == "X" || tab2[linha][coluna] == "O" {
+					if linha < 0 || linha >= 3 || coluna < 0 || coluna >= 3 || tab2[linha][coluna] == "\u001B[31mX\u001B[0m" || tab2[linha][coluna] == "\u001B[34mO\u001B[0m" {
 						fmt.Println("Posição inválida. Tente novamente.")
 						continue
 					}
 				case "#3", "3":
-					if linha < 0 || linha >= 3 || coluna < 0 || coluna >= 3 || tab3[linha][coluna] == "X" || tab3[linha][coluna] == "O" {
+					if linha < 0 || linha >= 3 || coluna < 0 || coluna >= 3 || tab3[linha][coluna] == "\u001B[31mX\u001B[0m" || tab3[linha][coluna] == "\u001B[34mO\u001B[0m" {
 						fmt.Println("Posição inválida. Tente novamente.")
 						continue
 					}
 				case "#4", "4":
-					if linha < 0 || linha >= 3 || coluna < 0 || coluna >= 3 || tab4[linha][coluna] == "X" || tab4[linha][coluna] == "O" {
+					if linha < 0 || linha >= 3 || coluna < 0 || coluna >= 3 || tab4[linha][coluna] == "\u001B[31mX\u001B[0m" || tab4[linha][coluna] == "\u001B[34mO\u001B[0m" {
 						fmt.Println("Posição inválida. Tente novamente.")
 						continue
 					}
 				case "#5", "5":
-					if linha < 0 || linha >= 3 || coluna < 0 || coluna >= 3 || tab5[linha][coluna] == "X" || tab5[linha][coluna] == "O" {
+					if linha < 0 || linha >= 3 || coluna < 0 || coluna >= 3 || tab5[linha][coluna] == "\u001B[31mX\u001B[0m" || tab5[linha][coluna] == "\u001B[34mO\u001B[0m" {
 						fmt.Println("Posição inválida. Tente novamente.")
 						continue
 					}
 				case "#6", "6":
-					if linha < 0 || linha >= 3 || coluna < 0 || coluna >= 3 || tab6[linha][coluna] == "X" || tab6[linha][coluna] == "O" {
+					if linha < 0 || linha >= 3 || coluna < 0 || coluna >= 3 || tab6[linha][coluna] == "\u001B[31mX\u001B[0m" || tab6[linha][coluna] == "\u001B[34mO\u001B[0m" {
 						fmt.Println("Posição inválida. Tente novamente.")
 						continue
 					}
 				case "#7", "7":
-					if linha < 0 || linha >= 3 || coluna < 0 || coluna >= 3 || tab7[linha][coluna] == "X" || tab7[linha][coluna] == "O" {
+					if linha < 0 || linha >= 3 || coluna < 0 || coluna >= 3 || tab7[linha][coluna] == "\u001B[31mX\u001B[0m" || tab7[linha][coluna] == "\u001B[34mO\u001B[0m" {
 						fmt.Println("Posição inválida. Tente novamente.")
 						continue
 					}
 				case "#8", "8":
-					if linha < 0 || linha >= 3 || coluna < 0 || coluna >= 3 || tab8[linha][coluna] == "X" || tab8[linha][coluna] == "O" {
+					if linha < 0 || linha >= 3 || coluna < 0 || coluna >= 3 || tab8[linha][coluna] == "\u001B[31mX\u001B[0m" || tab8[linha][coluna] == "\u001B[34mO\u001B[0m" {
 						fmt.Println("Posição inválida. Tente novamente.")
 						continue
 					}
 				case "#9", "9":
-					if linha < 0 || linha >= 3 || coluna < 0 || coluna >= 3 || tab9[linha][coluna] == "X" || tab9[linha][coluna] == "O" {
+					if linha < 0 || linha >= 3 || coluna < 0 || coluna >= 3 || tab9[linha][coluna] == "\u001B[31mX\u001B[0m" || tab9[linha][coluna] == "\u001B[34mO\u001B[0m" {
 						fmt.Println("Posição inválida. Tente novamente.")
 						continue
 					}
@@ -881,9 +893,32 @@ func main() {
 
 			}
 			if vencedor != "" {
-				fmt.Printf("Parabéns jogador %s, você acaba de ganhar o JOGO DA VELHA 2.0!", jogadorAtual)
+				for {
+					fmt.Printf("Parabéns jogador %s, você acaba de ganhar o JOGO DA VELHA 2.0!", jogadorAtual)
+					fmt.Print("Deseja jogar essa DESGRAMA novamente? ")
+					fmt.Scan(&novo)
+					resposta = strings.ToLower(resposta) // Converta a resposta para minúsculas
+					if novo == "sim" || novo == "y" || novo == "yes" || novo == "s" {
+						inicio()
+					} else {
+						fmt.Print("ADEUS SEU MERDA")
+					}
+				}
 			} else {
-				fmt.Print("Lamento jogadores, mas aparentemente deu velha. ")
+				for {
+					fmt.Print("Lamento jogadores, mas aparentemente deu velha. ")
+					fmt.Print("Deseja jogar essa DESGRAMA novamente? ")
+					fmt.Scan(&novo)
+					resposta = strings.ToLower(resposta) // Converta a resposta para minúsculas
+					if novo == "sim" || novo == "y" || novo == "yes" || novo == "s" {
+						inicio()
+						break
+					} else {
+						fmt.Print("ADEUS SEU MERDA")
+						break
+					}
+
+				}
 			}
 		}
 	}
