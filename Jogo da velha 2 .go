@@ -40,7 +40,7 @@ func inicio() bool {
 			fmt.Print("\nAté a próxima então!\n")
 			return false
 		}
-		fmt.Print("\nLarga de palhaçada e digida SIM ou NÃO pf.\n")
+		fmt.Print("\nDigite SIM ou NÃO.\n")
 	}
 }
 
@@ -775,7 +775,7 @@ func main() {
 				principal == "#7" || principal == "#8" || principal == "#9" {
 				break
 			}
-			fmt.Print("\nMermão digita direito isso ae bora\n")
+			fmt.Print("\nDigite de acordo com as opções\n")
 			continue
 		}
 		if movimentopodetp(principal) {
@@ -895,26 +895,26 @@ func main() {
 			if vencedor != "" {
 				for {
 					fmt.Printf("Parabéns jogador %s, você acaba de ganhar o JOGO DA VELHA 2.0!", jogadorAtual)
-					fmt.Print("Deseja jogar essa DESGRAMA novamente? ")
+					fmt.Print("Deseja jogar novamente? ")
 					fmt.Scan(&novo)
 					resposta = strings.ToLower(resposta) // Converta a resposta para minúsculas
 					if novo == "sim" || novo == "y" || novo == "yes" || novo == "s" {
 						inicio()
 					} else {
-						fmt.Print("ADEUS SEU MERDA")
+						fmt.Print("Até mais.")
 					}
 				}
 			} else {
 				for {
 					fmt.Print("Lamento jogadores, mas aparentemente deu velha. ")
-					fmt.Print("Deseja jogar essa DESGRAMA novamente? ")
+					fmt.Print("Deseja jogar novamente? ")
 					fmt.Scan(&novo)
 					resposta = strings.ToLower(resposta) // Converta a resposta para minúsculas
 					if novo == "sim" || novo == "y" || novo == "yes" || novo == "s" {
 						inicio()
 						break
 					} else {
-						fmt.Print("ADEUS SEU MERDA")
+						fmt.Print("Até mais.")
 						break
 					}
 
