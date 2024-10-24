@@ -1,4 +1,4 @@
-# Jogo-da-velha
+# Jogo-da-velha 2.0
 
 Finalmente o famoso jogo da velha recebeu uma atualização!
 
